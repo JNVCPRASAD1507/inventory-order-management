@@ -1,0 +1,49 @@
+{
+  "info": {
+    "name": "Inventory & Order Management API",
+    "_postman_id": "inventory-os-demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:8000/api/v1"},
+    {"key": "token", "value": ""},
+    {"key": "productId", "value": "1"},
+    {"key": "orderId", "value": "1"}
+  ],
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "url": "{{baseUrl}}/auth/register",
+        "body": {"mode":"raw","raw":"{\"full_name\":\"Demo Customer\",\"email\":\"customer@example.com\",\"password\":\"Password123\"}"}
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "url": "{{baseUrl}}/auth/login",
+        "body": {"mode":"raw","raw":"{\"email\":\"customer@example.com\",\"password\":\"Password123\"}"}
+      }
+    },
+    {
+      "name": "Profile",
+      "request": {"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/auth/profile"}
+    },
+    {
+      "name": "Products",
+      "request": {"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/products?limit=20"}
+    },
+    {
+      "name": "Orders",
+      "request": {"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/orders"}
+    },
+    {
+      "name": "Dashboard",
+      "request": {"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/dashboard/customer"}
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+erDiagram
+    USERS ||--o{ ORDERS : places
+    USERS ||--o{ REVIEWS : writes
+    USERS ||--o{ NOTIFICATIONS : receives
+    CATEGORIES ||--o{ PRODUCTS : contains
+    PRODUCTS ||--|| INVENTORY : has
+    ORDERS ||--|{ ORDER_ITEMS : contains
+    PRODUCTS ||--o{ ORDER_ITEMS : included_in
+    ORDERS ||--o| PAYMENTS : paid_by
+    PRODUCTS ||--o{ REVIEWS : receives
+    ORDERS ||--o{ REVIEWS : supports
+    USERS ||--o{ FILE_UPLOADS : owns
