@@ -6,13 +6,13 @@ from fastapi.staticfiles import StaticFiles
 from app.api.v1.router import api_router
 from app.core.config import settings
 from app.db.session import engine, Base
-from app import models  # noqa: ensure models registered
+from app import models  
 
-# Auto-create tables (Alembic still preferred for production Postgres)
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="Inventory & Order Management API",
+    title="Inventory & Order Management",
     version="1.0.0",
     description="Secure full-stack inventory and order management backend.",
 )
