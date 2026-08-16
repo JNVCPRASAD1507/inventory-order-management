@@ -189,23 +189,25 @@ def _change(
             404,
             "Inventory not found",
         )
+        
+        # Calculate new stock
 
     new_stock = item.current_stock + qty if add else item.current_stock - qty
-
+        # Prevent negative stock
     if new_stock < 0:
         raise HTTPException(
             409,
             "Stock cannot become negative",
         )
-
+    # Prevent exceeding maximum stock
     if new_stock > item.maximum_stock_level:
         raise HTTPException(
             409,
             "Stock exceeds maximum stock level",
         )
-
+     # Update inventory
     item.current_stock = new_stock
-
+    
     item.last_updated = datetime.now(timezone.utc)
 
     db.get(
@@ -234,11 +236,12 @@ def add_stock(
     _=Depends(require_roles(UserRole.ADMIN, UserRole.STAFF)),
 ):
     result = _change(
-        product_id,
-        data.quantity,
-        True,
-        db,
-    )
+    product_id,
+    data.quantity,
+    True,
+    db,
+    background_tasks,
+)
 
     queue_low_stock_emails(
         db,
@@ -258,11 +261,12 @@ def remove_stock(
     _=Depends(require_roles(UserRole.ADMIN, UserRole.STAFF)),
 ):
     result = _change(
-        product_id,
-        data.quantity,
-        False,
-        db,
-    )
+    product_id,
+    data.quantity,
+    False,
+    db,
+    background_tasks,
+)
 
     queue_low_stock_emails(
         db,

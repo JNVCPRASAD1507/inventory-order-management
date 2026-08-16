@@ -11,6 +11,7 @@ import { useAuth } from "../context/AuthContext";
 import Signup from "../pages/Signup";
 import ResetPassword from "../pages/ResetPassword";
 import ForgotPassword from "../pages/ForgotPassword";
+import UserManagement from "../pages/UserManagement";
 
 function Protected() {
   const { user } = useAuth();
@@ -31,6 +32,7 @@ export default function AppRoutes() {
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/notifications" element={<Notifications />} />
+        <Route path="/users" element={<UserManagement />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

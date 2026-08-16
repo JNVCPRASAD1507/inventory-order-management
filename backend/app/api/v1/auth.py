@@ -2,7 +2,7 @@ import secrets
 from datetime import datetime, timedelta, timezone
 import hashlib
 from datetime import datetime, timedelta, timezone
-
+from fastapi import Form, HTTPException, status
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -16,6 +16,8 @@ from app.core.security import (
     hash_password,
     verify_password,
 )
+
+from app.db.session import SessionLocal
 
 from app.models.user import User
 from app.models.email_verifications import EmailVerification
@@ -32,6 +34,8 @@ from app.schemas.auth import (
     ForgotPasswordRequest,
     ResetPasswordRequest,
 )
+
+from fastapi.security import OAuth2PasswordRequestForm
 
 router = APIRouter(
     prefix="/auth",
@@ -283,6 +287,63 @@ def login(
     )
 
 
+@router.post("/token")
+def login_for_swagger(
+    form_data: OAuth2PasswordRequestForm = Depends(),
+):
+    db = SessionLocal()
+
+    try:
+        # OAuth2 username field contains the user's email
+        user = db.scalar(
+            select(User).where(
+                User.email == form_data.username.lower()
+            )
+        )
+
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Incorrect email or password",
+            )
+
+        if not verify_password(
+            form_data.password,
+            user.password_hash,
+        ):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Incorrect email or password",
+            )
+
+        if not user.email_verified:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Please verify your email before logging in",
+            )
+
+        if not user.is_active:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="User is inactive",
+            )
+
+        # OAuth2-compatible JWT
+        access_token = create_access_token(
+            str(user.id),
+            user.role.value,
+        )
+
+        return {
+            "access_token": access_token,
+            "token_type": "bearer",
+        }
+
+    finally:
+        db.close()
+        
+        
+        
 # ============================================================
 # PROFILE
 # ============================================================

@@ -24,6 +24,7 @@ import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import { useAuth } from "../context/AuthContext";
 import api from "../api/client";
 
@@ -42,6 +43,18 @@ const menu = [
     label: "Notifications",
     path: "/notifications",
     icon: NotificationsRoundedIcon,
+  },
+  // {
+  //   label: "Users",
+  //   path: "/users",
+  //   icon: PeopleRoundedIcon,
+  //   roles: ["admin"],
+  // },
+  {
+    label: "User Management",
+    path: "/users",
+    icon: PeopleRoundedIcon,
+    roles: ["admin"],
   },
 ];
 

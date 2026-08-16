@@ -57,6 +57,7 @@ export default function Signup() {
         full_name: fullName,
         email,
         password,
+        role: "customer",
       });
 
       setSuccess("Account created successfully. Redirecting to login...");
