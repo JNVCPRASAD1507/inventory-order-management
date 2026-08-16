@@ -16,3 +16,6 @@ class Inventory(Base):
     last_updated: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
     product = relationship("Product", back_populates="inventory")
+
+
+

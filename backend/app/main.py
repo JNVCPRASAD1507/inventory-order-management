@@ -14,7 +14,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(
     title="Inventory & Order Management",
     version="1.0.0",
-    description="Secure full-stack inventory and order management backend.",
+    description="Secure full-stack inventory and order management.",
 )
 
 app.add_middleware(
