@@ -52,28 +52,57 @@ export default function Signup() {
 
     setLoading(true);
 
+    // try {
+    //   await register({
+    //     full_name: fullName,
+    //     email,
+    //     password,
+    //     role: "customer",
+    //   });
+
+    //   setSuccess("Account created successfully. Redirecting to login...");
+
+    //   setTimeout(() => {
+    //     navigate("/login");
+    //   }, 1000);
+    // } catch (err) {
+    //   setError(
+    //     err.response?.data?.detail ||
+    //       err.response?.data?.message ||
+    //       "Registration failed",
+    //   );
+    // } finally {
+    //   setLoading(false);
+    // }
+
     try {
-      await register({
-        full_name: fullName,
-        email,
-        password,
-        role: "customer",
-      });
+  await register({
+    full_name: fullName,
+    email,
+    password,
+    role: "customer",
+  });
 
-      setSuccess("Account created successfully. Redirecting to login...");
+  setSuccess(
+    "Account created successfully. An OTP has been sent to your email."
+  );
 
-      setTimeout(() => {
-        navigate("/login");
-      }, 1000);
-    } catch (err) {
-      setError(
-        err.response?.data?.detail ||
-          err.response?.data?.message ||
-          "Registration failed",
-      );
-    } finally {
-      setLoading(false);
-    }
+  setTimeout(() => {
+    navigate(
+      `/verify-email?email=${encodeURIComponent(
+        email
+      )}`
+    );
+  }, 1000);
+} catch (err) {
+  setError(
+    err.response?.data?.detail ||
+      err.response?.data?.message ||
+      "Registration failed"
+  );
+} finally {
+  setLoading(false);
+}
   };
 
   return (

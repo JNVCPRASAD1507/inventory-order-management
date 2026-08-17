@@ -35,10 +35,25 @@ export default function Login() {
       await login(email, password);
       navigate("/");
     } catch (err) {
-      setError(err.response?.data?.detail || "Login failed");
-    } finally {
-      setLoading(false);
-    }
+  const detail =
+    err.response?.data?.detail ||
+    "Login failed";
+
+  if (
+    err.response?.status === 403 &&
+    detail.toLowerCase().includes("verify your email")
+  ) {
+    navigate(
+      `/verify-email?email=${encodeURIComponent(
+        email
+      )}`
+    );
+
+    return;
+  }
+
+  setError(detail);
+}
   };
 
   return (

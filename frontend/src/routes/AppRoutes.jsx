@@ -12,6 +12,7 @@ import Signup from "../pages/Signup";
 import ResetPassword from "../pages/ResetPassword";
 import ForgotPassword from "../pages/ForgotPassword";
 import UserManagement from "../pages/UserManagement";
+import VerifyEmail from "../pages/VerifyEmail";
 
 function Protected() {
   const { user } = useAuth();
@@ -25,6 +26,7 @@ export default function AppRoutes() {
       <Route path="/signup" element={<Signup />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/verify-email" element={<VerifyEmail />} />
       <Route element={<Protected />}>
         <Route path="/" element={<Dashboard />} />
         <Route path="/products" element={<Products />} />
