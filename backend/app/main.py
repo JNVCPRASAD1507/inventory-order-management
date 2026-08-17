@@ -6,9 +6,8 @@ from fastapi.staticfiles import StaticFiles
 from app.api.v1.router import api_router
 from app.core.config import settings
 from app.db.session import engine, Base
-from app import models 
+from app import models
 from app.api.v1 import users
-
 
 Base.metadata.create_all(bind=engine)
 
@@ -20,6 +19,10 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
+    # allow_origins=[
+    #     "http://localhost:5173",
+    #     "http://10.138.134.207:5173",
+    # ],
     allow_origins=settings.cors_origins_list,
     allow_credentials=True,
     allow_methods=["*"],
@@ -39,4 +42,8 @@ def health():
 
 @app.get("/")
 def root():
-    return {"message": "Inventory & Order Management API", "docs": "/docs", "health": "/health"}
+    return {
+        "message": "Inventory & Order Management API",
+        "docs": "/docs",
+        "health": "/health",
+    }
