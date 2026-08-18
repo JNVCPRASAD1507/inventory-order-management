@@ -880,6 +880,15 @@ export default function Products() {
         }}
         fullWidth
         maxWidth="sm"
+        PaperProps={{
+          sx: {
+            background: "#111827",
+            color: "#ffffff",
+            border: "1px solid rgba(255,255,255,0.12)",
+            borderRadius: 3,
+            boxShadow: "0 25px 80px rgba(0,0,0,0.45)",
+          },
+        }}
       >
         <DialogTitle>Add New Product</DialogTitle>
 
@@ -1059,6 +1068,15 @@ export default function Products() {
         onClose={closeEditProduct}
         fullWidth
         maxWidth="sm"
+        PaperProps={{
+          sx: {
+            background: "#111827",
+            color: "#ffffff",
+            border: "1px solid rgba(255,255,255,0.12)",
+            borderRadius: 3,
+            boxShadow: "0 25px 80px rgba(0,0,0,0.45)",
+          },
+        }}
       >
         <DialogTitle>Edit Product</DialogTitle>
 
