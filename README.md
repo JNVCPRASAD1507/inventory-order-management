@@ -54,6 +54,9 @@ docker compose up --build
 | Staff    | staff@example.com     | staff123    |
 | Customer | customer@example.com  | customer123 |
 
+Instead of this use the real time g-mail id to get the better experience...
+
+
 ## Production notes
 
 1. Set a strong `SECRET_KEY` and Postgres credentials in `.env`
