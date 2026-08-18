@@ -58,7 +58,7 @@ Instead of using dummy mails to login use the real time g-mail id to get the bet
 dummy mails won't works 😎😎😎
 
 create u r own admin , staff , customer account ...
-The above data is for just show off 😜😜
+The above data is for just show
 
 ## Production notes
 
