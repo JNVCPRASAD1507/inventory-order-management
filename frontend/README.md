@@ -10,3 +10,7 @@ Run:
 npm install
 npm run dev
 ```
+
+Instead of using dummy mails to login use the real time g-mail id to get the better experience...
+dummy mails won't works 😎😎😎
+
