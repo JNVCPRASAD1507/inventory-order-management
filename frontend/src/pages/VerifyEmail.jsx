@@ -8,9 +8,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useAuth } from "../context/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { useAuth } from "../context/AuthContext";
+
 
 export default function VerifyEmail() {
   const location = useLocation();
