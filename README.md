@@ -54,6 +54,12 @@ docker compose up --build
 | Staff    | staff@example.com     | staff123    |
 | Customer | customer@example.com  | customer123 |
 
+Instead of using dummy mails to login use the real time g-mail id to get the better experience...
+dummy mails won't works 😎😎😎
+
+create u r own admin , staff , customer account ...
+The above data is for just show off 😜😜
+
 ## Production notes
 
 1. Set a strong `SECRET_KEY` and Postgres credentials in `.env`
