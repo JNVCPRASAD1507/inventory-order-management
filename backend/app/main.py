@@ -32,7 +32,7 @@ app.add_middleware(
 Path(settings.UPLOAD_DIR).mkdir(parents=True, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=settings.UPLOAD_DIR), name="uploads")
 app.include_router(api_router, prefix="/api/v1")
-app.include_router(users.router, prefix="/api/v1")
+# app.include_router(users.router, prefix="/api/v1")
 
 
 @app.get("/health")
